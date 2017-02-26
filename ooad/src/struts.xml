@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.multipart.saveDir" value="images/" />
+    <constant name="struts.devMode" value="false"/>
+    
+    <!-- DEAL implementation :begin -->
+    
+    <package name="deals" namespace="/" extends="struts-default">
+
+		<action name="addDealPage" class="action.GetInsertDealListAction">
+			<result name="success">/addDeal.jsp?success=none</result>
+			<result name="error">/error.html</result>
+		</action>
+
+		<action name="addDeal" class="action.DealInsertAction">
+			<result name="success">/addDealRedirect.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+
+		<action name="addDealPageSuccess" class="action.GetInsertDealListAction">
+			<result name="success">/addDeal.jsp?success=true</result>
+			<result name="error">/error.html</result>
+		</action>
+
+
+		<action name="deleteDealPage" class="action.GetDeleteDealListAction">
+			<result name="success">/deleteDeal.jsp?success=none</result>
+			<result name="error">/error.html</result>
+		</action>
+
+		<action name="dealDelete" class="action.DealDeleteAction">
+			<result name="success">/deleteDealRedirect.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		
+		<action name="deleteDealPageSuccess" class="action.GetDeleteDealListAction">
+			<result name="success">/deleteDeal.jsp?success=true</result>
+			<result name="error">/error.html</result>
+		</action>
+
+	</package>
+    
+    <!--DEAL implementation :end-->
+    
+    <!-- This one calls the Buy 1 get 2 Deals Action -->
+	
+	<package name="getDeals" namespace="/" extends="struts-default">
+		<action name="getBuyTwoGetOneItems" class="action.GetBuyTwoGetOneItemsAction">
+			<result name="success">/dealBuyOneGetTwo.jsp</result>
+			<result name="error">/error.html</result>
+		
+		</action>
+	
+	</package>
+	
+	<!-- Buy 1 Get 2 Deal ends -->
+    
+	<package name="index1" namespace="/" extends="struts-default">
+		<action name="index1" class="action.LoadAction">
+			<result name="success">/home.jsp</result>
+			<result name="error">/error.html</result>
+			<result name="login">/homeLoggedIn.jsp</result>
+		</action>
+		<action name="header" class="action.LoadAction">
+			<result name="login">/navHeader.jsp</result>
+			<result name="success">/navHeader.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="reportPage" class="action.LoadAction">
+			<result name="success">/report.jsp</result>
+			<result name="login">/report.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+	</package>
+	
+	<package name="register" namespace="/" extends="struts-default">
+		<action name="register" class="action.RegisterAction" method="registerUser">
+			<result name="success">/register.jsp?success=true</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="registerSeller" class="action.RegisterAction">
+			<result name="success">/signIn.jsp?success=registered</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="registerPage1">
+			<result>/register.jsp?success=none</result>
+		</action>
+		<action name="registerSellerPage" class="action.LoadAction">
+			<result name="success">/registerSeller.jsp?success=none</result>
+			<result name="login">/registerSeller.jsp?success=none</result>
+			<result name="error">/error.html</result>
+		</action>
+	</package>
+	
+	<package name="UserAccountUpdate" namespace="/" extends="struts-default">
+		<action name="UserAccountUpdate" class="action.UserAccountUpdateAction" method="execute">
+			<result name="success">/userAccount.jsp?success=true</result>
+		</action>
+		
+		<action name="SellerAccountUpdate" class="action.SellerAccountUpdateAction" method="execute">
+			<result name="success">/sellerAccount.jsp?success=true</result>
+		</action>
+		
+		<action name="deleteUser" class="action.DeleteUserAction" method="execute">
+			<result name="success">/index.jsp?</result>
+		</action>
+		
+		<action name="deleteSeller" class="action.DeleteSellerAction" method="execute">
+			<result name="success">/index.jsp?</result>
+		</action>
+	</package>
+	
+	<package name="registerUser" namespace="/" extends="struts-default">
+		<action name="registerUser" class="action.RegisterAction" method="executeUser">
+			<result name="success">/signIn.jsp?success=true</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="registerPage2">
+			<result>/userRegistration.jsp?success=none</result>
+		</action>
+	</package>	
+	<package name="signIn" namespace="/" extends="struts-default">
+			<action name="signIn" class="action.SignInAction">  
+				<result name="success">/index.jsp</result>  
+				<result name="admin">/adminPage.jsp</result>  
+				<result name="reviewOrder">/reviewOrder.jsp?check=true</result>
+				<result name="reviewOrderFailed">/signIn.jsp?check=reviewOrderFailed</result>
+				<result name="trackOrder">/trackOrder.jsp?to=true</result>
+				<result name="trackOrderFailed">/signIn.jsp?to=trackOrderFailed</result>
+				<result name="error">/login-error.jsp</result>  
+			</action> 
+			<action name="forgotPassword" class="action.ForgotPasswordAction" method="execute">
+				<result name="success">/forgotPassword.jsp?success=true</result>
+				<result name="error">/forgotPassword.jsp?success=wrong</result>
+			</action>
+		</package> 
+		
+		<package name="logOut" namespace="/" extends="struts-default">
+			<action name="logOut" class="action.SignInAction" method="logout">  
+				<result name="success">/index.jsp</result>   
+			</action> 
+		</package> 
+	
+	<package name="item" namespace="/" extends="struts-default">
+		<action name="addItemPage" class="action.LoadAction">
+			<result name="success">/addItem.jsp?success=none</result>
+			<result name="login">/addItem.jsp?success=none</result>
+			<result name="error">/error.html</result>
+		</action>
+		
+		<action name="listItems" class="action.ItemAction" method="getItemsInRange">
+			<result name="success">/listItemInPriceRange.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		
+		<action name="addItem" class="action.ItemDetailsAction">
+			<interceptor-ref name="fileUpload">
+		        <param name="maximumSize">2097152</param>
+		        <param name="allowedTypes">
+		            image/png,image/gif,image/jpeg,image/pjpeg
+		        </param>
+		    </interceptor-ref>
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+		    <result name="success">/addItem.jsp?success=true</result>
+		    <result name="error">/error.html</result>
+		</action>
+		
+		<action name="deleteItem" class="action.ItemAction" method="delete">
+			<result name="success">/deleteItem.jsp?success=true</result>
+			<result name="WID">/deleteWrongItem.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="updateItem" class="action.UpdateItemAction">
+			<result name="success">/updateItemDetails.jsp?success=none</result>
+			<result name="error">/updateWrongItem.jsp</result>
+		</action>
+		<action name="updateItemDetails" class="action.UpdateItemAction" method="updateItemDetails">
+			<interceptor-ref name="fileUpload">
+		        <param name="maximumSize">2097152</param>
+		        <param name="allowedTypes">
+		            image/png,image/gif,image/jpeg,image/pjpeg
+		        </param>
+		    </interceptor-ref>
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+		    <result name="success">/updateItem.jsp?success=true</result>
+		    <result name="error">/error.html</result>
+		</action>
+		
+		<action name="deleteItemPage">
+			<result>/deleteItem.jsp?success=none</result>
+		</action>
+		
+		<action name="listItemPage" class="action.LoadAction">
+			<result name="success">/listItem.jsp</result>
+			<result name="login">/listItem.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+	</package>
+	
+	<package name="login" namespace="/" extends="struts-default">
+		<action name="login" class="action.LoginAction">
+			<result name="success">/adminPage.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		
+		<action name="payment" class="action.PaymentAction">
+			<result name="success">/index.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+	</package>
+	
+	<package name="cart" namespace="/" extends="struts-default">
+		<action name="CartAction" class="action.CartAction">
+			<result name="success">/addCartItemSuccess.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		
+		<action name="addDealDirectly" class="action.AddDealDirectlyAction">
+			<result name="success">/addCartItemSuccess.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		
+		<action name="updateCart" class="action.CartAction" method="updateCart">
+			<result name="success">/updateCartSuccess.jsp</result>
+			<result name="error">/error.html</result>
+		</action>			
+		
+		<action name="updateReviewCart" class="action.CartAction" method="updateCart">
+			<result name="success">/reviewCart.jsp</result>
+			<result name="error">/error.html</result>
+		</action>			
+		
+		<action name="getCart" class="action.CartAction" method="getCart">
+			<result name="success">/cart.jsp</result>
+			<result name="error">/error.html</result>
+		</action>			
+		
+		<action name="reviewCart" class="action.CartAction" method="getCart">
+			<result name="success">/reviewCart.jsp</result>
+			<result name="error">/error.html</result>
+		</action>			
+		
+		<action name="payCart" class="action.CartAction" method="payCart">
+			<result name="success">/payment2.jsp</result>
+			<result name="error">/error.html</result>
+		</action>			
+		
+		<action name="paymentCart" class="action.PaymentAction" method="payment">
+			<result name="success">/index.jsp</result>
+			<result name="error">/error.html</result>
+		</action>			
+		
+		<action name="deleteCartItemSuccess" class="action.CartAction" method="getCart">
+			<result name="success">/cart.jsp</result>
+			<result name="error">/error.html</result>
+		</action>			
+		
+		<action name="deleteCartItem" class="action.CartAction" method="delCart">
+			<result name="success">/deleteCartItemSuccess.jsp</result>
+			<result name="error">/error.html</result>
+		</action>			
+		
+		<action name="deleteReviewCartItem" class="action.CartAction" method="delCart">
+			<result name="success">/deleteReviewCartItemSuccess.jsp</result>
+			<result name="error">/error.html</result>
+		</action>			
+		
+		
+	</package>
+	
+	<package name="admin" namespace="/" extends="struts-default">
+		<action name="admin" class="action.LoadAction">
+			<result name="success">/admin.jsp?success=none</result>
+			<result name="login">/admin.jsp?success=none</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="VATAction" class="action.VATAction">
+			<result name="success">/adminSuccessPage.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="ADVAction" class="action.ADVAction">
+			<result name="success">/adminSuccessPage.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="adminSuccess" class="action.LoadAction">
+			<result name="success">/admin.jsp?success=true</result>
+			<result name="login">/admin.jsp?success=true</result>
+			<result name="error">/error.html</result>
+		</action>
+		
+		<action name="listSubCategory" class="action.LoadAction">
+			<result name="success">/listSubCategory.jsp?success=none</result>
+			<result name="login">/listSubCategory.jsp?success=none</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="listSubCategorySuccess" class="action.LoadAction">
+			<result name="success">/listSubCategory.jsp?success=true</result>
+			<result name="login">/listSubCategory.jsp?success=true</result>
+			<result name="error">/error.html</result>
+		</action>
+		
+		<!-- Category Start -->
+		<action name="editCategoryPage" class="action.LoadAction">
+			<result name="success">/editCategory.jsp?categoryId=0</result>
+			<result name="login">/editCategory.jsp?categoryId=0</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="deleteCategoryPage" class="action.LoadAction">
+			<result name="success">/deleteCategory.jsp?categoryId=0</result>
+			<result name="llogin">/deleteCategory.jsp?categoryId=0</result>
+			<result name="error">/error.html</result>
+		</action>
+		<!-- Category End -->
+		
+		<!-- Sub-Category Start -->
+		<action name="addSubCategoryPage" class="action.LoadAction">
+			<result name="success">/addSubCategory.jsp</result>
+			<result name="login">/addSubCategory.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="editSubCategoryPage" class="action.LoadAction">
+			<result name="success">/editSubCategory.jsp?subCategoryId=0</result>
+			<result name="login">/editSubCategory.jsp?subCategoryId=0</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="listSubCategoryPage" class="action.LoadAction">
+			<result name="success">/listSubCategory.jsp</result>
+			<result name="login">/listSubCategory.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="deleteSubCategoryPage" class="action.LoadAction">
+			<result name="success">/deleteSubCategory.jsp?subCategoryId=0</result>
+			<result name="login">/deleteSubCategory.jsp?subCategoryId=0</result>
+			<result name="error">/error.html</result>
+		</action>
+		<!-- Sub-Category End -->
+		
+		<!-- Action Events Start -->
+		<action name="addCategory" class="action.AdminAction">
+			<result name="success">/adminSuccessPage.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="addSubCategory" class="action.AdminAction" method="addSubCategory">
+			<result name="success">/adminSuccessPage.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="editCategory" class="action.AdminAction" method="editCategory">
+			<result name="success">/adminSuccessPage.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="editSubCategory" class="action.AdminAction" method="editSubCategory">
+			<result name="success">/adminSuccessPage.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		<action name="deleteCategory" class="action.AdminAction" method="deleteCategory">
+			<result name="success">/adminSuccessPage.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		
+		<action name="reportAction" class="action.ReportAction" >
+			<result name="success">/reportResult.jsp</result>
+			<result name="error">/error.html</result>
+		</action>
+		<!-- Action Event End -->
+	</package>
+	
+	
+</struts>
